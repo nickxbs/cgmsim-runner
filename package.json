@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/nickxbs/cgmsim-runner#readme",
   "dependencies": {
-    "@lsandini/cgmsim-lib": "github:lsandini/cgmsim-lib",
+    "@lsandini/cgmsim-lib": "0.0.6",
     "dotenv": "^16.0.1",
     "node-cron": "^3.0.0"
   },

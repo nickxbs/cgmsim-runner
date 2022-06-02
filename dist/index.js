@@ -6,6 +6,7 @@ const cgmsim_lib_1 = require("@lsandini/cgmsim-lib");
 const cron = require("node-cron");
 dotenv.config();
 const env = process.env;
+const logLevel = env.LOG_LEVEL;
 function run() {
     return tslib_1.__awaiter(this, void 0, void 0, function* () {
         try {
@@ -23,17 +24,27 @@ function run() {
             };
             console.log(`NS:`, NS);
             console.log(`params:`, params);
-            const down = yield (0, cgmsim_lib_1.downloads)(NS.NIGHTSCOUT_URL, NS.APISECRET);
+            const down = yield cgmsim_lib_1.downloads(NS.NIGHTSCOUT_URL, NS.APISECRET);
             console.log(`test0, download`);
             const treatments = down.treatments;
             const entries = down.entries;
-            const newEntry = (0, cgmsim_lib_1.simulator)({ entries, treatments, env: params, profiles: [] });
+            const newEntry = cgmsim_lib_1.simulator({ entries, treatments, env: params, profiles: [] });
             console.log(`test1, main`);
-            (0, cgmsim_lib_1.uploadEntries)({
+            yield cgmsim_lib_1.uploadEntries({
                 sgv: newEntry.sgv,
-                mills: new Date().getTime()
+                direction: newEntry.direction
             }, NS.NIGHTSCOUT_URL, NS.APISECRET);
             console.log(`test2, upload to `, env.nsUrl);
+            if (logLevel === 'debug') {
+                const notes = `min:${newEntry.deltaMinutes}<br>
+			carb:${newEntry.carbsActivity.toFixed(4)}<br>
+			bas:${newEntry.basalActivity.toFixed(4)}<br>
+			bol:${newEntry.bolusActivity.toFixed(4)}<br>
+			liv:${newEntry.liverActivity.toFixed(4)}<br>
+			noise:${newEntry.noiseActivity.toFixed(4)}<br>
+			pump:${newEntry.pumpBasalActivity.toFixed(4)} `;
+                yield cgmsim_lib_1.uploadNotes(notes, NS.NIGHTSCOUT_URL, NS.APISECRET);
+            }
         }
         catch (e) {
             console.log(e);
