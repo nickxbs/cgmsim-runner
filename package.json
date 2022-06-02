@@ -1,0 +1,29 @@
+{
+  "name": "@nickxbs/cgmsim-runner",
+  "version": "0.0.1",
+  "description": "cgmsim runner",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc -p tsconfig-build.json",
+    "lint": "eslint",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nickxbs/cgmsim-runner.git"
+  },
+  "author": "Nicola Febbrari",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nickxbs/cgmsim-runner/issues"
+  },
+  "homepage": "https://github.com/nickxbs/cgmsim-runner#readme",
+  "dependencies": {
+    "@lsandini/cgmsim-lib": "github:lsandini/cgmsim-lib",
+    "dotenv": "^16.0.1",
+    "node-cron": "^3.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^17.0.38"
+  }
+}
