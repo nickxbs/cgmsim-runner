@@ -55,7 +55,7 @@ function run() {
                 ISF: env.ISF,
                 CR: env.CR,
                 DIA: env.DIA,
-                WEIGHT: env.EIGHT,
+                WEIGHT: env.WEIGHT,
                 TP: env.TP,
                 CARBS_ABS_TIME: env.CARBS_ABS_TIME,
             };
