@@ -66,10 +66,11 @@ function run() {
             const treatments = down.treatments;
             const entries = down.entries;
             const newEntry = cgmsim_lib_1.simulator({ entries, treatments, env: params, profiles: [] });
+            const direction = cgmsim_lib_1.arrows(newEntry.sgv, entries[0], entries[1], entries[2]);
             console.log(`test1, main`);
             yield cgmsim_lib_1.uploadEntries({
                 sgv: newEntry.sgv,
-                direction: newEntry.direction
+                direction
             }, NS.NIGHTSCOUT_URL, NS.APISECRET);
             console.log(`test2, upload to `, env.nsUrl);
             if (logLevel === 'debug') {
