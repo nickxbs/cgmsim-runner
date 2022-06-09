@@ -1,5 +1,5 @@
 import * as dotenv from 'dotenv';
-import { simulator, downloads, uploadEntries, simulatorUVA, uploadNotes } from '@lsandini/cgmsim-lib';
+import { simulator, downloads, uploadEntries, simulatorUVA, uploadNotes,arrows } from '@lsandini/cgmsim-lib';
 import * as cron from 'node-cron';
 
 dotenv.config();
@@ -72,10 +72,12 @@ async function run() {
 		const treatments = down.treatments;
 		const entries = down.entries;
 		const newEntry = simulator({ entries, treatments, env: params, profiles: [] });
+		const direction = arrows(newEntry.sgv,entries[0],entries[1],entries[2] )
+
 		console.log(`test1, main`);
 		await uploadEntries({
 			sgv: newEntry.sgv,
-			direction: newEntry.direction
+			direction
 		}, NS.NIGHTSCOUT_URL, NS.APISECRET);
 		console.log(`test2, upload to `, env.nsUrl);
 		if (logLevel === 'debug') {
