@@ -66,7 +66,7 @@ function run() {
             const treatments = down.treatments;
             const entries = down.entries;
             const newEntry = cgmsim_lib_1.simulator({ entries, treatments, env: params, profiles: [] });
-            const direction = cgmsim_lib_1.arrows(newEntry.sgv, entries[0], entries[1], entries[2]);
+            const { direction } = cgmsim_lib_1.arrows(newEntry.sgv, entries[0].sgv, entries[1].sgv, entries[2].sgv);
             console.log(`test1, main`);
             yield cgmsim_lib_1.uploadEntries({
                 sgv: newEntry.sgv,

@@ -72,7 +72,7 @@ async function run() {
 		const treatments = down.treatments;
 		const entries = down.entries;
 		const newEntry = simulator({ entries, treatments, env: params, profiles: [] });
-		const {direction} = arrows(newEntry.sgv,entries[0],entries[1],entries[2] )
+		const {direction} = arrows(newEntry.sgv,entries[0].sgv,entries[1].sgv,entries[2].sgv )
 
 		console.log(`test1, main`);
 		await uploadEntries({
